@@ -7,7 +7,7 @@ import { http } from 'viem';
 
 import "@rainbow-me/rainbowkit/styles.css";
 import {
-  getDefaultWallets,
+  getDefaultConfig,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiProvider } from "wagmi";
@@ -39,18 +39,27 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const queryClient = new QueryClient();
 
 // Configure wagmi
-const config = createConfig({
-  chains: [sepolia],
-  transports: {
-    [sepolia.id]: http(), // uses default public RPC
-  },
-});
+// const config = createConfig({
+//   chains: [sepolia],
+//   transports: {
+//     [sepolia.id]: http(), // uses default public RPC
+//   },
+// });
 
-// Get default wallets
-const { wallets } = getDefaultWallets({
-  appName: "ConfiaPay",
-  projectId: "cde6b941ba0c104a1111b579588c7e7e", // get one at cloud.walletconnect.com
-  chains: [sepolia],
+// // Get default wallets
+// const { wallets } = getDefaultWallets({
+//   appName: "ConfiaPay",
+//   projectId: "cde6b941ba0c104a1111b579588c7e7e", // get one at cloud.walletconnect.com
+//   chains: [sepolia],
+// });
+
+const config = getDefaultConfig({
+  appName: 'ConfiaPay',
+  projectId: 'cde6b941ba0c104a1111b579588c7e7e', // get one at cloud.walletconnect.com
+  chains: [sepolia], 
+  transports: {
+    [sepolia.id]: http(), 
+  },
 });
 
 // Render app
